@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: mongo:latest
+    container_name: mongoDb
+    ports:
+      - "27017:27017"
+  web:
+    image: tw1nk1e/todo_web_ui:latest
+    container_name: webUI
+    ports:
+      - "3000:3000"
+    command: npm start
+  api:
+    image: tw1nk1e/todo_web_api:latest
+    container_name: webAPI
+    environment:
+      - spring.data.mongodb.uri=mongodb://db/ToDoApp
+    ports:
+      - "8080:8080"
